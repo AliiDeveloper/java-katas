@@ -6,8 +6,17 @@ public class Account {
 
 
     public Account(String owner, double balance) {
-        this.owner = owner;
-        this.balance = balance;
+
+        if(balance<0){
+            throw new IllegalArgumentException("Amount must be positive or 0");
+        } else {
+            this.owner = owner;
+            this.balance = balance;
+        }
+    }
+
+    public String getOwner(){
+        return this.owner;
     }
 
     public double getBalance() {
@@ -23,10 +32,14 @@ public class Account {
 
     public void withdraw(double amount){
 
-        if (this.balance-amount<0){
+          if (amount<=0) {
+            throw new IllegalArgumentException("Amount must be positive");
+
+          } else if (this.balance-amount<0){
             throw new IllegalStateException("Not enough balance");
+
         }
-        this.balance-=amount;
+          this.balance-=amount;
     }
 
 }
